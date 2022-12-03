@@ -13,12 +13,13 @@ class First extends StatefulWidget {
 
 class _FirstState extends State<First> {
   List screens=[
-    Home(),
-    HomePage(),
+    HomePage(city: "Ghaziabad",),
+    HomePage(city: "Ghaziabad",),
     Fav(),
     You(),
   ];
   int currentIndex=0;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

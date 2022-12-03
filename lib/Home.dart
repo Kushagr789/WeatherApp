@@ -8,6 +8,22 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
+class Today{
+  String time,icon,temp;
+  Today(
+    {required this.icon,required this.temp,required this.time}
+  );
+}
+List<Today>today=[
+  Today(icon: "sun", temp: "27\u00B0", time: "12PM"),
+  Today(icon: "sun", temp: "27\u00B0", time: "01PM"),
+  Today(icon: "sun", temp: "28\u00B0", time: "02PM"),
+  Today(icon: "sun", temp: "28\u00B0", time: "03PM"),
+  Today(icon: "suncloud", temp: "27\u00B0", time: "04PM"),
+  Today(icon: "cloud", temp: "26\u00B0", time: "05PM"),
+  Today(icon: "cloud", temp: "25\u00B0", time: "06PM"),
+  Today(icon: "moon", temp: "23\u00B0", time: "07PM"),
+];
 
 class _HomeState extends State<Home> {
   
@@ -31,14 +47,14 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: size.height*0.05,),
-              Text('San Fransisco',
+              Text('Ghaziabad',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
-              Text('18\u00B0',
+              Text('27\u00B0',
                 style: TextStyle(
                   fontSize: 90,
                   fontWeight: FontWeight.bold,
@@ -166,9 +182,9 @@ class _HomeState extends State<Home> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('10AM',style: TextStyle(fontSize: 20,color: Colors.white),),
-                            Icon(FontAwesomeIcons.cloudMoon,size: 30,color: Colors.yellow,),
-                            Text('19\u00B0',style: TextStyle(fontSize: 35,color: Colors.white),)
+                            Text(today[index].time,style: TextStyle(fontSize: 20,color: Colors.white),),
+                            Icon(FontAwesomeIcons.cloudSun,size: 30,color: Colors.yellow,),
+                            Text(today[index].temp,style: TextStyle(fontSize: 35,color: Colors.white),)
 
                           ],
                         ),

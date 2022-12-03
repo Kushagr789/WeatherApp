@@ -36,7 +36,7 @@ class _YouState extends State<You> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('San Fransisco, California, USA',
+              Text('Ghaziabad, Uttar Pradesh, India',
                 style: TextStyle(
                   fontSize: 22,
                   color: Colors.white
@@ -48,7 +48,7 @@ class _YouState extends State<You> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                FontAwesomeIcons.solidMoon,
+                FontAwesomeIcons.cloudSun,
                 size: 170,
                 color: Colors.blue,
               )
@@ -67,7 +67,7 @@ class _YouState extends State<You> {
                   
                 ),
                 child: Center(
-                  child: Text('Moonlight',
+                  child: Text('Sunlight',
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white
@@ -80,7 +80,7 @@ class _YouState extends State<You> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('20\u00B0C',
+              Text('26\u00B0C',
                 style: TextStyle(
                   fontSize: 100,
                   fontWeight: FontWeight.w400,
@@ -182,9 +182,12 @@ class _YouState extends State<You> {
                             ),
                           ),
                           GestureDetector(
+                            onTap: () {
+                              
+                            },
                             child: Row(
                               children: [
-                                Text('m/s',style: TextStyle(fontSize: 22,color: Colors.blue),),
+                                Text('km/h',style: TextStyle(fontSize: 22,color: Colors.blue),),
                                 Icon(FontAwesomeIcons.chevronRight,size: 25,color: Colors.white,)
                               ],
                             ),
