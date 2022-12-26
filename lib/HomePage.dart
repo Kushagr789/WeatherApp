@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Service/data.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:weather_icons/weather_icons.dart';
+
 class HomePage extends StatefulWidget {
    String city;
    HomePage({super.key,required this.city});
@@ -27,7 +29,17 @@ TextEditingController searchController =new TextEditingController();
   String City="";
   String Rain="";
   String Main="";
-
+  String AQI="";
+  List<String>Temp=[];
+  List<String>Time=[];
+  List<String>IC=[];
+  List<String>IC1=[];
+  List<String>MIN=[];
+  List<String>MAX=[];
+  String icon="sun";
+  List<String>Day=[];
+  
+  
   
   void startApp(String loc) async
   {
@@ -46,8 +58,18 @@ TextEditingController searchController =new TextEditingController();
     MaxT=instance.maxT;
     Pressure=instance.pressure;
     City=instance.name;
-    
+    Main=instance.main;
+    Temp=instance.L;
+    Time=instance.dt;
+    IC=instance.ic;
+    IC1=instance.ic1;
+    MAX=instance.max;
+    MIN=instance.min;
+    Day=instance.dt1;
+    AQI=instance.Aqi;
+    //IC=instance.ic;
     });
+    
     }
     
   }
@@ -167,7 +189,7 @@ TextEditingController searchController =new TextEditingController();
                   color: Colors.deepPurple,
                 ),
                 child: Center(
-                  child: Text('Cloudy',style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),),
+                  child: Text('$Main',style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),),
                 ),
               ),
               
@@ -209,8 +231,8 @@ TextEditingController searchController =new TextEditingController();
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text('Sunrise 06:46',style: TextStyle(color: Colors.white,fontSize: 17),),
-                                Text('Sunset 17:25',style: TextStyle(color: Colors.white,fontSize: 17),),
+                                Text('Sunrise $Sunrise',style: TextStyle(color: Colors.white,fontSize: 17),),
+                                Text('Sunset $Sunset',style: TextStyle(color: Colors.white,fontSize: 17),),
                               ],
                             )
                           ],
@@ -273,14 +295,14 @@ TextEditingController searchController =new TextEditingController();
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text('Pressure',style: TextStyle(fontSize: 15,color: Colors.grey),),
-                                      Text('${Pressure}mmbar',style: TextStyle(color: Colors.white,fontSize: 25),)
+                                      Text('${Pressure}mbar',style: TextStyle(color: Colors.white,fontSize: 25),)
                                     ],
                                   ),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('UV index',style: TextStyle(fontSize: 15,color: Colors.grey),),
-                                      Text('3',style: TextStyle(color: Colors.white,fontSize: 25),)
+                                      Text('AQ index',style: TextStyle(fontSize: 15,color: Colors.grey),),
+                                      Text(AQI,style: TextStyle(color: Colors.white,fontSize: 25),)
                                     ],
                                   ),
                                 ],
@@ -297,7 +319,7 @@ TextEditingController searchController =new TextEditingController();
                 width: size.width,
                 
                 child: ListView.builder(
-                  itemCount: 10,scrollDirection: Axis.horizontal,
+                  itemCount: IC.length,scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       child: Container(
@@ -308,9 +330,9 @@ TextEditingController searchController =new TextEditingController();
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('time',style: TextStyle(fontSize: 20,color: Colors.white),),
-                            Icon(FontAwesomeIcons.cloudSun,size: 30,color: Colors.yellow,),
-                            Text('25',style: TextStyle(fontSize: 35,color: Colors.white),)
+                            Text(Time[index],style: TextStyle(fontSize: 20,color: Colors.white),),
+                            Image.network(IC[index]),
+                            Text('${Temp[index]}\u00B0',style: TextStyle(fontSize: 35,color: Colors.white),)
 
                           ],
                         ),
@@ -327,7 +349,7 @@ TextEditingController searchController =new TextEditingController();
           
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: Day.length,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Container(
@@ -338,25 +360,25 @@ TextEditingController searchController =new TextEditingController();
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Tuesday',
+                          Text(Day[index],
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                               color: Colors.white
                             ),
                           ),
-                          Icon(FontAwesomeIcons.cloudMoon,size: 25,color: Colors.yellow,),
+                          Image.network(IC1[index]),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('${MaxT}\u00B0',
+                              Text('${MIN[index]}\u00B0',
                                 style: TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white
                                 ),
                               ),
-                              Text('${MinT}\u00B0',
+                              Text('${MAX[index]}\u00B0',
                                 style: TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
