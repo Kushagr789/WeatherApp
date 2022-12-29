@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
+import 'package:flutter_weather_bg_null_safety/flutter_weather_bg.dart';
 import 'Service/data.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_icons/weather_icons.dart';
@@ -38,6 +40,9 @@ TextEditingController searchController =new TextEditingController();
   List<String>MAX=[];
   String icon="sun";
   List<String>Day=[];
+  WeatherType w=WeatherType.sunny;
+  int now=0;
+  int sr=0,st=0;
   
   
   
@@ -67,7 +72,41 @@ TextEditingController searchController =new TextEditingController();
     MIN=instance.min;
     Day=instance.dt1;
     AQI=instance.Aqi;
+    sr=instance.grise;
+    st=instance.gset;
     //IC=instance.ic;
+    now=DateTime.now().millisecondsSinceEpoch;
+
+    if(Main=='Clouds')
+    {
+      if(now>sr&&now<st)
+      w=WeatherType.cloudy;
+      else
+      w=WeatherType.cloudyNight;
+    }
+    else if(Main=='Clear')
+    {
+      if(now>sr&&now<st)
+      w=WeatherType.sunny;
+      else
+      w=WeatherType.sunnyNight;
+    }
+    else if(Main=='Mist'||Main=='Haze')
+    w=WeatherType.hazy;
+    else if(Main=='Rain')
+    w=WeatherType.heavyRainy;
+    else if(Main=='Fog')
+    w=WeatherType.foggy;
+    else if(Main=='Dust')
+    w=WeatherType.dusty;
+    else if(Main=='Thunderstorm')
+    w=WeatherType.thunder;
+    else
+    w=WeatherType.overcast;
+    
+    
+
+
     });
     
     }
@@ -94,12 +133,13 @@ TextEditingController searchController =new TextEditingController();
       
       child: Stack(
         children: [
-          Image.asset('assets/images/night.jpg',
-          fit: BoxFit.cover,
-          height: double.infinity,
-          width: double.infinity,
+          WeatherBg(weatherType: w, width: size.width, height: size.height),
+          //Image.asset('assets/images/night.jpg',
+          //fit: BoxFit.cover,
+          //height: double.infinity,
+          //width: double.infinity,
 
-          ),
+          //),
           NestedScrollView(
         headerSliverBuilder: ((context, innerBoxIsScrolled) {
           return <Widget>[
@@ -109,7 +149,7 @@ TextEditingController searchController =new TextEditingController();
               floating: false,
               pinned: false,
               toolbarHeight: size.height*0.1,
-              backgroundColor: Color.fromRGBO(0, 0, 0, 0),
+              backgroundColor: Colors.transparent,
               flexibleSpace: Container(
           height: size.height*0.7,
           width: size.width,
@@ -190,17 +230,19 @@ TextEditingController searchController =new TextEditingController();
               )
                 ],
               ),
-              Container(
+              Opacity(opacity: 0.4,
+                child: Container(
                 
                 width: size.width*0.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.deepPurple,
+                  color: Colors.black,
                 ),
                 child: Center(
                   child: Text('$Main',style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),),
                 ),
               ),
+              )
               
               
             ],
@@ -217,13 +259,15 @@ TextEditingController searchController =new TextEditingController();
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                Opacity(opacity: 0.4,
+                  child: Container(
                   width: size.width,
                   height: size.height*0.4,
                   margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Color.fromARGB(255, 11, 0, 34),
+                    color: Colors.black,
+                    
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,6 +367,7 @@ TextEditingController searchController =new TextEditingController();
                     ],
                   ),
                 ),
+                ),
                 Container(
                 height: size.height*0.15,
                 width: size.width,
@@ -334,7 +379,7 @@ TextEditingController searchController =new TextEditingController();
                       child: Container(
                         height: size.height*0.15,
                         width: size.width*0.23,
-                        color: Color.fromARGB(255, 11, 0, 34),
+                        color: Colors.transparent,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,

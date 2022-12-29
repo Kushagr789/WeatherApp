@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weatherapp/Service/data.dart';
+import 'package:flutter_weather_bg_null_safety/flutter_weather_bg.dart';
 
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -123,14 +125,17 @@ class _LocationState extends State<Location> {
   Widget build(BuildContext context) {
     final size=MediaQuery.of(context).size;
     return  Container(
-      height: size.height*1.5,
+      height: size.height,
       width: size.width,
       color: Colors.black,
-      child: NestedScrollView(
+      child: Stack(
+        children: [
+          WeatherBg(weatherType: WeatherType.hazy, width: size.width, height: size.height),
+          NestedScrollView(
         headerSliverBuilder: ((context, innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              collapsedHeight: size.height*0.4,
+              collapsedHeight: size.height*0.5,
               expandedHeight: size.height*0.6,
               floating: false,
               pinned: false,
@@ -144,21 +149,21 @@ class _LocationState extends State<Location> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(height: size.height*0.05,),
+              SizedBox(height: size.height*0.1,),
               Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(FontAwesomeIcons.locationCrosshairs,size: 18,color: Color.fromARGB(255, 174, 173, 173),),
+              Icon(FontAwesomeIcons.locationCrosshairs,size: 18,color: Colors.black,),
               Text('Your Location Now',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color.fromARGB(255, 174, 173, 173)
+                  color: Colors.black
                   
                 ),
               )
             ],
           ),
-              SizedBox(height: size.height*0.05,),
+              SizedBox(height: size.height*0.01,),
               SizedBox(height: 15,),
           
               Text(City,
@@ -168,6 +173,7 @@ class _LocationState extends State<Location> {
                   color: Colors.white,
                 ),
               ),
+              SizedBox(height: size.height*0.05,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,17 +201,19 @@ class _LocationState extends State<Location> {
               )
                 ],
               ),
-              Container(
+              SizedBox(height: size.height*0.01,),
+              Opacity(opacity: 0.4,
+              child: Container(
                 
                 width: size.width*0.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.deepPurple,
+                  color: Colors.black,
                 ),
                 child: Center(
                   child: Text(Main,style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),),
                 ),
-              ),
+              ),),
               
               
             ],
@@ -222,13 +230,15 @@ class _LocationState extends State<Location> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                Opacity(opacity: 0.4,
+                
+                child: Container(
                   width: size.width,
                   height: size.height*0.4,
                   margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Color.fromARGB(255, 11, 0, 34),
+                    color: Colors.black,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -327,11 +337,13 @@ class _LocationState extends State<Location> {
                       )
                     ],
                   ),
-                ),
+                ),)
               ]
             ),
           )
         )
+      )
+        ],
       )
     );
     

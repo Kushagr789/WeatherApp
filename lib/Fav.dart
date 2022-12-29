@@ -30,6 +30,7 @@ class _FavState extends State<Fav> {
       City[index].Temperature=instance.temp;
     City[index].Humidity=instance.humidity;
     City[index].Speed=instance.air_speed;
+    City[index].icon=instance.icon;
     
     });
     }
@@ -76,7 +77,9 @@ class _FavState extends State<Fav> {
                         borderRadius: BorderRadius.circular(20),
                         color: Color.fromARGB(255, 40, 67, 81),
                       ),
-                      child: Column(
+                      child: Stack(
+                        children: [
+                          Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
@@ -105,7 +108,7 @@ class _FavState extends State<Fav> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Icon(FontAwesomeIcons.moon,color: Colors.blue,size: 55,)
+                                  
                                 ],
                               )
                             ],
@@ -152,6 +155,8 @@ class _FavState extends State<Fav> {
               ),
                         ],
                       ),
+                        ],
+                      )
                     );
                   },
                 ),
@@ -170,13 +175,14 @@ class city{
   String Temperature;
   String Speed;
   String Humidity;
-  city({required this.name,required this.Temperature,required this.Humidity,required this.Speed});
+  String icon;
+  city({required this.name,required this.Temperature,required this.Humidity,required this.Speed,required this.icon});
 }
 List<city>City=[
-  city(name: "Delhi", Temperature: "", Humidity: "", Speed: ""),
-  city(name: "Mumbai", Temperature: "", Humidity: "", Speed: ""),
-  city(name: "Kolkata", Temperature: "", Humidity: "", Speed: ""),
-  city(name: "Bangalore", Temperature: "", Humidity: "", Speed: ""),
-  city(name: "Chennai", Temperature: "", Humidity: "", Speed: ""),
-  city(name: "Pune", Temperature: "", Humidity: "", Speed: ""),
+  city(name: "Delhi", Temperature: "", Humidity: "", Speed: "",icon: ""),
+  city(name: "Mumbai", Temperature: "", Humidity: "", Speed: "",icon: ""),
+  city(name: "Kolkata", Temperature: "", Humidity: "", Speed: "",icon: ""),
+  city(name: "Bangalore", Temperature: "", Humidity: "", Speed: "",icon: ""),
+  city(name: "Chennai", Temperature: "", Humidity: "", Speed: "",icon: ""),
+  city(name: "Pune", Temperature: "", Humidity: "", Speed: "",icon: ""),
 ];

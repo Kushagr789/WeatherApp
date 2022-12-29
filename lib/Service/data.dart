@@ -32,6 +32,8 @@ class Data
   List<String> max=[];
   List<String> ic1=[];
   List<String> dt1=[];
+  int grise=0;
+  int gset=0;
 
 
   Data({required this.location})
@@ -55,10 +57,10 @@ class Data
     Map wind=data['wind'];
     String gair_speed=(wind['speed']*3.6).toStringAsFixed(1);
     Map sun=data['sys'];
-    int grise=sun['sunrise'];
+    grise=sun['sunrise'];
     DateTime b=DateTime.fromMillisecondsSinceEpoch(grise*1000);
     String gsunrise=(b.hour).toString()+':'+(b.minute).toString();
-    int gset=sun['sunset'];
+    gset=sun['sunset'];
     DateTime a=DateTime.fromMillisecondsSinceEpoch(gset*1000);
     //DateTime a=DateTime.now();
     //Duration d=a.difference(b);
@@ -78,6 +80,8 @@ class Data
     
     Map w=weather[0];
     String gmain=w['main'];
+    String i=w['icon'];
+    icon='http://openweathermap.org/img/w/'+i+'.png';
 
     
     Response response1=await get(Uri.parse('https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=1befebc0c18af2890ed719c8b680c70d'));
