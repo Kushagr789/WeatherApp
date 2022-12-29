@@ -33,6 +33,7 @@ class Data
   List<String> ic1=[];
   List<String> dt1=[];
 
+
   Data({required this.location})
   {
     location=this.location;
@@ -167,3 +168,68 @@ class Data
   }
 }
 
+class Data1{
+  double? la,lo;
+  String? location;
+  String LAT="";
+  String LON="";
+  String temp="";
+  String main="";
+  String city="";
+  String sunrise="";
+  String sunset="";
+  String real="";
+  String pressure="";
+  String windspeed="";
+  String humidity="";
+  String Aqi="";
+  List<String> L=[];
+  List<String> dt=[];
+  List<String> ic=[];
+  List<String> min=[];
+  List<String> max=[];
+  List<String> ic1=[];
+  List<String> dt1=[];
+
+  Data1({required this.location}){
+    location=this.location;
+    
+  }
+
+  Future<void> get1() async
+  {
+    try{
+      Response res= await get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=Ghaziabad&appid=1befebc0c18af2890ed719c8b680c70d'));
+      Map da1=jsonDecode(res.body);
+      Map td=da1['main'];
+      Map cord=da1['coord'];
+      double lat=cord['lat'];
+      double lon=cord['lon'];
+      temp=((td['temp']-273.0).round()).toString();
+      real=((td['feels_like']-273.0).round()).toString();
+      humidity=td['humidity'].toString();
+      pressure=td['pressure'].toString();
+      city=da1['name'];
+      Map wind=da1['wind'];
+      windspeed=(wind['speed']*3.6).toStringAsFixed(1);
+      Map sun=da1['sys'];
+      int rise=sun['sunrise'];
+      int set=sun['sunset'];
+      DateTime a=DateTime.fromMillisecondsSinceEpoch(rise*1000);
+      sunrise=(a.hour).toString()+':'+(a.minute).toString();
+      DateTime b=DateTime.fromMillisecondsSinceEpoch(set*1000);
+      sunset=(b.hour).toString()+':'+(b.minute).toString();
+      Response res1=await get(Uri.parse('http://api.openweathermap.org/data/2.5/air_pollution?lat=$lat&lon=$lon&appid=1befebc0c18af2890ed719c8b680c70d'));
+      Map data3=jsonDecode(res1.body);
+      List x=data3['list'];
+      Map y=x[0];
+      Aqi=(y['main']['aqi']).toString();
+      main=da1['weather'][0]['main'];
+
+    }catch(e)
+    {
+      temp="l";
+      
+    }
+  }
+}

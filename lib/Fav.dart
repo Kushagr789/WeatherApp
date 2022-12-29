@@ -54,41 +54,7 @@ class _FavState extends State<Fav> {
           padding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
           child: Column(
             children: [
-              Container(
-                height: size.height*0.06,
-                width: size.width,
-                margin: EdgeInsets.symmetric(horizontal: 1,vertical: 10),
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(color: Colors.black),
-                  color: Colors.white
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        
-                        
-                      },
-                      child: Icon(Icons.search,color: Colors.blue,size: 30,),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        controller: searchController,
-                        style: TextStyle(fontSize: 22,),
-                        decoration: InputDecoration(
-                          hintText: 'Search any city',
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(fontSize: 20,color: Colors.black54)
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              SizedBox(height: size.height*0.07,),
               Container(
                 height: size.height*0.62,
                 width: size.width,

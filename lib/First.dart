@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weatherapp/Fav.dart';
 import 'package:weatherapp/Home.dart';
 import 'package:weatherapp/HomePage.dart';
+import 'package:weatherapp/Location.dart';
 import 'package:weatherapp/You.dart';
 class First extends StatefulWidget {
   const First({super.key});
@@ -14,9 +15,8 @@ class First extends StatefulWidget {
 class _FirstState extends State<First> {
   List screens=[
     HomePage(city: "Ghaziabad",),
-    HomePage(city: "Ghaziabad",),
     Fav(),
-    You(),
+    Location(),
   ];
   int currentIndex=0;
   
@@ -51,19 +51,7 @@ class _FirstState extends State<First> {
             ),
             label: "home",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.map,
-              color: Colors.blue,
-              size: 25,
-            ),
-            activeIcon: Icon(
-              FontAwesomeIcons.map,
-              color: Colors.pink,
-              size: 25,
-            ),
-            label: "Atlas"
-          ),
+          
           BottomNavigationBarItem(
             icon: Icon(
               FontAwesomeIcons.heart,
@@ -79,12 +67,12 @@ class _FirstState extends State<First> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              FontAwesomeIcons.bars,
+              FontAwesomeIcons.locationPin,
               color: Colors.blue,
               size: 25,
             ),
             activeIcon: Icon(
-              FontAwesomeIcons.bars,
+              FontAwesomeIcons.locationPin,
               color: Colors.pink,
               size: 25,
             ),

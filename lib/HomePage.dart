@@ -91,8 +91,16 @@ TextEditingController searchController =new TextEditingController();
     return  Container(
       height: size.height*2,
       width: size.width,
-      color: Colors.black,
-      child: NestedScrollView(
+      
+      child: Stack(
+        children: [
+          Image.asset('assets/images/night.jpg',
+          fit: BoxFit.cover,
+          height: double.infinity,
+          width: double.infinity,
+
+          ),
+          NestedScrollView(
         headerSliverBuilder: ((context, innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
@@ -125,13 +133,7 @@ TextEditingController searchController =new TextEditingController();
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        startApp(searchController.text);
-                        
-                      },
-                      child: Icon(Icons.search,color: Colors.blue,size: 30,),
-                    ),
+                    
                     Expanded(
                       child: TextField(
                         controller: searchController,
@@ -142,7 +144,14 @@ TextEditingController searchController =new TextEditingController();
                           hintStyle: TextStyle(fontSize: 20,color: Colors.black54)
                         ),
                       ),
-                    )
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        startApp(searchController.text);
+                        
+                      },
+                      child: Icon(Icons.search,color: Colors.blue,size: 30,),
+                    ),
                   ],
                 ),
               ),
@@ -399,6 +408,8 @@ TextEditingController searchController =new TextEditingController();
         )
       
     ),
+        ],
+      )
     );
   }
 }
